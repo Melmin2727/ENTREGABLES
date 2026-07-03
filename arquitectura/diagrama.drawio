@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-07-03T00:00:00.000Z" agent="Proyecto-WordPress-AWS" version="24.0.0" type="device">
+  <diagram id="arquitectura-comercial-nova" name="Arquitectura AWS - Comercial Nova">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="internet" value="Internet / Usuarios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpc" value="VPC Comercial Nova (10.0.0.0/16)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;verticalAlign=top;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="140" width="680" height="600" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subnet_pub" value="Subredes Públicas (AZ-a / AZ-b)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="270" y="180" width="620" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="alb" value="Application Load Balancer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="480" y="210" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subnet_priv_app" value="Subredes Privadas - Aplicación (AZ-a / AZ-b)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="270" y="300" width="620" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="asg" value="Auto Scaling Group" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="330" width="420" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ec2a" value="EC2 WordPress 1&#10;Ubuntu + Apache + PHP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="410" y="360" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ec2b" value="EC2 WordPress 2&#10;Ubuntu + Apache + PHP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="600" y="360" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subnet_priv_data" value="Subredes Privadas - Datos (AZ-a / AZ-b)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="270" y="480" width="620" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rds" value="Amazon RDS MySQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="480" y="510" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3" value="Amazon S3&#10;Medios y Respaldos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="960" y="360" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cw" value="Amazon CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="960" y="460" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="iam" value="AWS IAM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="540" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="internet" target="alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="alb" target="ec2a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="alb" target="ec2b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ec2a" target="rds">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ec2b" target="rds">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ec2a" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ec2b" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1" edge="1" parent="1" source="ec2a" target="cw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1" edge="1" parent="1" source="rds" target="cw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1" edge="1" parent="1" source="cw" target="iam">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
